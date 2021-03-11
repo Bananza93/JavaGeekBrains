@@ -12,22 +12,23 @@ package ru.geekbrains.java_level_1.lesson1;
 
 public class Lesson1Homework {
     public static void main(String[] args) {
-        //1
+
+        System.out.println("Задача 1");
         System.out.println(calculateExpression(10, 50, 10, 3));
 
-        //2
+        System.out.println("\nЗадача 2");
         System.out.println(checkSum(5,14));
         System.out.println(checkSum(10,21));
 
-        //3
+        System.out.println("\nЗадача 3");
         checkPosOrNeg(10);
         checkPosOrNeg(0);
         checkPosOrNeg(-10);
 
-        //4
+        System.out.println("\nЗадача 4");
         System.out.println(getGreeting("Сергей"));
 
-        //5
+        System.out.println("\nЗадача 5");
         System.out.println(checkLeapYear(1800));
         System.out.println(checkLeapYear(2000));
         System.out.println(checkLeapYear(2004));
