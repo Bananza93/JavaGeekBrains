@@ -11,17 +11,12 @@ public class Lesson6Homework {
      * Написать набор тестов для этого метода (по 3-4 варианта входных данных). Вх: [ 1 2 4 4 2 3 4 1 7 ] -> вых: [ 1 7 ].
      */
     public int[] lastAfterLastFour(int[] array) throws RuntimeException {
-        int lastIndex = array.length;
-        for (int i = lastIndex - 1; i >= 0; i--) {
+        for (int i = array.length - 1; i >= 0; i--) {
             if (array[i] == 4) {
-                lastIndex = i;
-                break;
+                return Arrays.copyOfRange(array, i + 1, array.length);
             }
         }
-        if (lastIndex == array.length) {
-            throw new RuntimeException();
-        }
-        return Arrays.copyOfRange(array, lastIndex, array.length);
+        throw new RuntimeException();
     }
 
     /**
