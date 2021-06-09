@@ -12,14 +12,10 @@ public class Lesson6Homework {
         int lastIndex = array.length;
         for (int i = lastIndex - 1; i >= 0; i--) {
             if (array[i] == 4) {
-                lastIndex = i;
-                break;
+                return Arrays.copyOfRange(array, lastIndex, array.length);
             }
         }
-        if (lastIndex == array.length) {
-            throw new RuntimeException();
-        }
-        return Arrays.copyOfRange(array, lastIndex, array.length);
+        throw new RuntimeException();
     }
 
     /**
