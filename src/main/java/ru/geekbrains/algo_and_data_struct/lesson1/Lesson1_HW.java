@@ -2,7 +2,7 @@ package ru.geekbrains.algo_and_data_struct.lesson1;
 
 import java.math.BigInteger;
 
-public class Test {
+public class Lesson1_HW {
 
     public static void main(String[] args) {
         ex1();
