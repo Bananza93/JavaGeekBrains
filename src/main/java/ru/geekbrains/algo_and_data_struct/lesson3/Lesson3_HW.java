@@ -5,7 +5,9 @@ import java.util.Arrays;
 public class Lesson3_HW {
 
     public static void main(String[] args) {
-        findMissingNumberTest();
+        findMissingNumberEx();
+        queueEx();
+        dequeEx();
     }
 
     private static int findMissingNumber(int[] array) {
@@ -29,7 +31,7 @@ public class Lesson3_HW {
         else return array[firstIndex] + 1;
     }
 
-    private static void findMissingNumberTest() {
+    private static void findMissingNumberEx() {
         //Empty array test
         System.out.println(findMissingNumber(new int[0]));
         //One element array
@@ -50,5 +52,46 @@ public class Lesson3_HW {
             System.out.println("Result      = " + result);
             System.out.println();
         }
+    }
+
+    private static void queueEx() {
+        QueueImpl<Integer> queue = new QueueImpl<>(8);
+        queue.display();
+        queue.add(8);
+        queue.display();
+        queue.addAll(4,5,1,10,-1,123,0);
+        queue.display();
+        System.out.println(queue.peek());
+        System.out.println(queue.remove());
+        System.out.println(queue.remove());
+        System.out.println(queue.remove());
+        System.out.println(queue.peek());
+        queue.display();
+        queue.addAll(8800,555,3535);
+        queue.display();
+    }
+
+    private static void dequeEx() {
+        DequeImpl<Integer> deque = new DequeImpl<>(8);
+        deque.display();
+        deque.addLast(8);
+        deque.addLast(5);
+        deque.addFirst(10);
+        deque.addFirst(31);
+        deque.addLast(3);
+        deque.addFirst(21);
+        deque.addLast(7);
+        deque.addFirst(12);
+        deque.display();
+        System.out.println(deque.peekFirst());
+        System.out.println(deque.peekLast());
+        System.out.println(deque.removeFirst());
+        System.out.println(deque.removeLast());
+        System.out.println(deque.removeFirst());
+        deque.display();
+        deque.addLast(123);
+        deque.addLast(321);
+        deque.addFirst(1111);
+        deque.display();
     }
 }
