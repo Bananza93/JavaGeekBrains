@@ -56,24 +56,30 @@ public class Lesson3_HW {
 
     private static void queueEx() {
         QueueImpl<Integer> queue = new QueueImpl<>(8);
+        System.out.println("Queue created (capacity = " + queue.size());
         queue.display();
+        System.out.println("Add: 8");
         queue.add(8);
         queue.display();
+        System.out.println("Add: 4,5,1,10,-1,123,0");
         queue.addAll(4,5,1,10,-1,123,0);
         queue.display();
-        System.out.println(queue.peek());
-        System.out.println(queue.remove());
-        System.out.println(queue.remove());
-        System.out.println(queue.remove());
-        System.out.println(queue.peek());
+        System.out.println("First element: " + queue.peek());
+        System.out.println("Remove: " + queue.remove());
+        System.out.println("Remove: " + queue.remove());
+        System.out.println("Remove: " + queue.remove());
+        System.out.println("First element: " + queue.peek());
         queue.display();
         queue.addAll(8800,555,3535);
         queue.display();
+        System.out.println();
     }
 
     private static void dequeEx() {
         DequeImpl<Integer> deque = new DequeImpl<>(8);
         deque.display();
+        System.out.println("Add first: 10,31,21,12");
+        System.out.println("Add last: 8,5,3,7");
         deque.addLast(8);
         deque.addLast(5);
         deque.addFirst(10);
@@ -83,12 +89,14 @@ public class Lesson3_HW {
         deque.addLast(7);
         deque.addFirst(12);
         deque.display();
-        System.out.println(deque.peekFirst());
-        System.out.println(deque.peekLast());
-        System.out.println(deque.removeFirst());
-        System.out.println(deque.removeLast());
-        System.out.println(deque.removeFirst());
+        System.out.println("First element: " + deque.peekFirst());
+        System.out.println("Last element: " + deque.peekLast());
+        System.out.println("Remove first: " + deque.removeFirst());
+        System.out.println("Remove last: " + deque.removeLast());
+        System.out.println("Remove first: " + deque.removeFirst());
         deque.display();
+        System.out.println("Add first: 1111");
+        System.out.println("Add last: 123,321");
         deque.addLast(123);
         deque.addLast(321);
         deque.addFirst(1111);

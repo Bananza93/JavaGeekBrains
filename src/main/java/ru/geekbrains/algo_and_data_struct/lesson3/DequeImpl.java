@@ -1,6 +1,7 @@
 package ru.geekbrains.algo_and_data_struct.lesson3;
 
 public class DequeImpl<E> implements Deque<E> {
+
     private final E[] data;
     private int size;
 
@@ -19,7 +20,7 @@ public class DequeImpl<E> implements Deque<E> {
     @Override
     public boolean addFirst(E value) {
         if (isFull()) return false;
-        headIndex = (headIndex + data.length - 1) % data.length;
+        headIndex = (headIndex + (data.length - 1)) % data.length;
         data[headIndex] = value;
         size++;
         return true;
@@ -37,7 +38,7 @@ public class DequeImpl<E> implements Deque<E> {
     @Override
     public E removeFirst() {
         if (isEmpty()) return null;
-        E elem = peekFirst();
+        E elem = data[headIndex];
         headIndex = (headIndex + 1) % data.length;
         size--;
         return elem;
@@ -46,22 +47,20 @@ public class DequeImpl<E> implements Deque<E> {
     @Override
     public E removeLast() {
         if (isEmpty()) return null;
-        E elem = peekLast();
-        tailIndex = (tailIndex + data.length - 1) % data.length;
+        E elem = data[tailIndex];
+        tailIndex = (tailIndex + (data.length - 1)) % data.length;
         size--;
         return elem;
     }
 
     @Override
     public E peekFirst() {
-        if (isEmpty()) return null;
-        return data[headIndex];
+        return isEmpty() ? null : data[headIndex];
     }
 
     @Override
     public E peekLast() {
-        if (isEmpty()) return null;
-        return data[tailIndex];
+        return isEmpty() ? null : data[tailIndex];
     }
 
     @Override

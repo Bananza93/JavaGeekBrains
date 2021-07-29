@@ -1,6 +1,7 @@
 package ru.geekbrains.algo_and_data_struct.lesson3;
 
 public class QueueImpl<E> implements Queue<E> {
+
     private final E[] data;
     private int size;
 
@@ -27,7 +28,6 @@ public class QueueImpl<E> implements Queue<E> {
 
     @SafeVarargs
     public final void addAll(E... values) {
-        if (isFull()) return;
         for (E value : values) {
             if (!add(value)) return;
         }
@@ -36,7 +36,7 @@ public class QueueImpl<E> implements Queue<E> {
     @Override
     public E remove() {
         if (isEmpty()) return null;
-        E elem = peek();
+        E elem = data[headIndex];
         headIndex = (headIndex + 1) % data.length;
         size--;
         return elem;
@@ -44,8 +44,7 @@ public class QueueImpl<E> implements Queue<E> {
 
     @Override
     public E peek() {
-        if (isEmpty()) return null;
-        return data[headIndex];
+        return isEmpty() ? null : data[headIndex];
     }
 
     @Override
