@@ -1,20 +1,9 @@
 package ru.geekbrains.algo_and_data_struct.lesson3;
 
-public class DequeImpl<E> implements Deque<E> {
+public class DequeImpl<E> extends QueueImpl<E> implements Deque<E> {
 
-    private final E[] data;
-    private int size;
-
-    private int headIndex;
-    private int tailIndex;
-
-    @SuppressWarnings("unchecked")
     public DequeImpl(int capacity) {
-        if (capacity <= 0) throw  new IllegalArgumentException("Capacity must be > 0");
-        data = (E[]) new Object[capacity];
-        size = 0;
-        headIndex = 0;
-        tailIndex = -1;
+        super(capacity);
     }
 
     @Override
@@ -61,47 +50,5 @@ public class DequeImpl<E> implements Deque<E> {
     @Override
     public E peekLast() {
         return isEmpty() ? null : data[tailIndex];
-    }
-
-    @Override
-    public boolean add(E value) {
-        return addLast(value);
-    }
-
-    @Override
-    public E remove() {
-        return removeFirst();
-    }
-
-    @Override
-    public E peek() {
-        return peekFirst();
-    }
-
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public boolean isFull() {
-        return size == data.length;
-    }
-
-    @Override
-    public void display() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (int index = headIndex, iter = size; iter > 0; iter--, index = (index + 1) % data.length) {
-            sb.append(data[index]);
-            if (iter > 1) sb.append(", ");
-        }
-        sb.append("]");
-        System.out.println(sb);
     }
 }

@@ -16,7 +16,7 @@ public class Lesson3_HW {
         int firstIndex = 0;
         int lastIndex = array.length - 1;
 
-        while (lastIndex - firstIndex > 0) {
+        while (lastIndex > firstIndex) {
             int mid = (firstIndex + lastIndex) / 2;
             if (array[mid] == mid + 1) {
                 firstIndex = mid + 1;
@@ -56,7 +56,7 @@ public class Lesson3_HW {
 
     private static void queueEx() {
         QueueImpl<Integer> queue = new QueueImpl<>(8);
-        System.out.println("Queue created (capacity = " + queue.size());
+        System.out.println("Queue created (capacity = " + queue.size() + ")");
         queue.display();
         System.out.println("Add: 8");
         queue.add(8);
@@ -77,6 +77,7 @@ public class Lesson3_HW {
 
     private static void dequeEx() {
         DequeImpl<Integer> deque = new DequeImpl<>(8);
+        System.out.println("Deque created (capacity = " + deque.size() + ")");
         deque.display();
         System.out.println("Add first: 10,31,21,12");
         System.out.println("Add last: 8,5,3,7");

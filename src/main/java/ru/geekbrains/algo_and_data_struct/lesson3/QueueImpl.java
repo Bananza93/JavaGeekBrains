@@ -2,11 +2,11 @@ package ru.geekbrains.algo_and_data_struct.lesson3;
 
 public class QueueImpl<E> implements Queue<E> {
 
-    private final E[] data;
-    private int size;
+    protected final E[] data;
+    protected int size;
 
-    private int headIndex;
-    private int tailIndex;
+    protected int headIndex;
+    protected int tailIndex;
 
     @SuppressWarnings("unchecked")
     public QueueImpl(int capacity) {
