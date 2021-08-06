@@ -1,32 +1,36 @@
 package ru.geekbrains.algo_and_data_struct.lesson4;
 
 import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
 
 public class Lesson4_HW {
     public static void main(String[] args) {
-        /*SimpleLinkedList<Integer> list = new SimpleLinkedListImpl<>();
+        task1();
+        task2();
+        telegramTask1();
+        telegramTask2();
+        telegramTask3();
+    }
+
+    private static void task1() {
+        SimpleLinkedList<Integer> list = new SimpleLinkedListImpl<>();
         list.add(1);
         list.add(2);
         list.add(3);
         list.add(4);
         list.add(5);
-        for (Integer i : list) {
-            System.out.print(i + " ");
-        }
+        for (Integer i : list) System.out.print(i + " ");
         System.out.println();
-        //list.display();
         list.remove();
         list.display();
         list.remove(4);
         list.display();
         list.remove(2);
-        for (Integer i : list) {
-            System.out.print(i + " ");
-        }*/
+        for (Integer i : list) System.out.print(i + " ");
+        System.out.println("\n");
+    }
 
-        /*Deque<Integer> deque = new DequeLinkedList<>();
+    private static void task2() {
+        Deque<Integer> deque = new DequeLinkedList<>();
         deque.addFirst(4);
         deque.addFirst(3);
         deque.addFirst(2);
@@ -42,23 +46,36 @@ public class Lesson4_HW {
         System.out.println("Removed: " + deque.removeLast());
         System.out.println("First: " + deque.peekFirst());
         System.out.println("Last: " + deque.peekLast());
-        deque.display();*/
-        long start = System.currentTimeMillis();
-        String[] t = TelegramTask1.getAllCombinations("abcde");
-        System.out.println(Arrays.toString(t) + " " + (System.currentTimeMillis() - start));
-        /*for (int i = 20; i <= 100; i++) {
+        for (Integer i : deque) System.out.print(i + " ");
+        System.out.println("\n");
+    }
+
+    private static void telegramTask1() {
+        String[] strings = {"", "a", "aa", "abba", "abcd"};
+        for (String string : strings) {
+            String[] t = TelegramTask1.getAllCombinations(string);
+            System.out.print("String \"" + string + "\" -> ");
+            System.out.println(Arrays.toString(t));
+        }
+        System.out.println();
+    }
+
+    private static void telegramTask2() {
+        for (int i = 1; i <= 50; i+=5) {
             int ij = TelegramTask2.getMinNumber(i);
             if (ij != -1) System.out.println("Для " + i + " способов минимальное число " + ij);
-        }*/
-        //System.out.println(TelegramTask2.getMinNumber(5001));
+        }
+        System.out.println("Для " + 5000 + " способов минимальное число " + TelegramTask2.getMinNumber(5000) + "\n");
+    }
 
-        /*
-        * Выписав первые шесть простых чисел, получим 2, 3, 5, 7, 11 и 13. Очевидно, что 6-е простое число - 13.
-        * Какое число является 10001-м простым числом?
-        * */
-//        long start = System.currentTimeMillis();
-//        System.out.println(TelegramTask3.findPrimeNumber(100001) + " " + (System.currentTimeMillis() - start));
-
+    private static void telegramTask3() {
+        long start = System.currentTimeMillis();
+        System.out.println("Первые 100 простых чисел:");
+        for (int i = 1; i <= 100; i++) {
+            System.out.print(TelegramTask3.findPrimeNumber(i) + " ");
+        }
+        System.out.println();
+        System.out.println("100001 простое число = " + TelegramTask3.findPrimeNumber(100001) + " (за " + (System.currentTimeMillis() - start) + " ms)");
     }
 
 

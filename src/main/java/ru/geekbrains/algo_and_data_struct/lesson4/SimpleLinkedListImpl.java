@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 
 public class SimpleLinkedListImpl<E> implements SimpleLinkedList<E>, Iterable<E> {
 
-    private Node<E> firstNode = null;
-    private int size;
+    protected Node<E> firstNode = null;
+    protected int size;
 
     @Override
     public boolean add(E element) {

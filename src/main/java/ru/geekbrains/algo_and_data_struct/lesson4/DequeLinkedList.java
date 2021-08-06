@@ -1,13 +1,10 @@
 package ru.geekbrains.algo_and_data_struct.lesson4;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+public class DequeLinkedList<E> extends SimpleLinkedListImpl<E> implements Deque<E> {
 
-public class DequeLinkedList<E> implements Deque<E>, Iterable<E> {
-
-    private Node<E> firstNode = null;
-    private Node<E> lastNode = null;
-    private int size;
+    //private Node<E> firstNode = null;
+    protected Node<E> lastNode = null;
+    //private int size;
 
     @Override
     public boolean addFirst(E element) {
@@ -28,7 +25,7 @@ public class DequeLinkedList<E> implements Deque<E>, Iterable<E> {
             lastNode = firstNode = new Node<>(element, lastNode, firstNode);
         } else {
             Node<E> currentLast = lastNode;
-            lastNode = new Node<E>(element, currentLast, null);
+            lastNode = new Node<>(element, currentLast, null);
             currentLast.setNext(lastNode);
         }
         size++;
@@ -82,30 +79,7 @@ public class DequeLinkedList<E> implements Deque<E>, Iterable<E> {
         throw new UnsupportedOperationException();
     }
 
-    @Override
-    public int size() {
-        return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    @Override
-    public void display() {
-        StringBuilder sb = new StringBuilder("[");
-        Node<E> currentNode = firstNode;
-        while (currentNode != null) {
-            sb.append(currentNode.getData());
-            currentNode = currentNode.getNext();
-            if (currentNode != null) sb.append(" -> ");
-        }
-        sb.append("]");
-        System.out.println(sb);
-    }
-
-    @Override
+    /*@Override
     public Iterator<E> iterator() {
         return new DequeLinkedListIterator();
     }
@@ -133,5 +107,5 @@ public class DequeLinkedList<E> implements Deque<E>, Iterable<E> {
             nextIndex++;
             return current.getData();
         }
-    }
+    }*/
 }
