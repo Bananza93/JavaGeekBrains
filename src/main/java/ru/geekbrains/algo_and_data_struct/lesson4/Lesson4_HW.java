@@ -1,5 +1,6 @@
 package ru.geekbrains.algo_and_data_struct.lesson4;
 
+import java.io.File;
 import java.util.Arrays;
 
 public class Lesson4_HW {
@@ -9,6 +10,7 @@ public class Lesson4_HW {
         telegramTask1();
         telegramTask2();
         telegramTask3();
+        telegramTask4();
     }
 
     private static void task1() {
@@ -78,5 +80,9 @@ public class Lesson4_HW {
         System.out.println("100001 простое число = " + TelegramTask3.findPrimeNumber(100001) + " (за " + (System.currentTimeMillis() - start) + " ms)");
     }
 
-
+    private static void telegramTask4() {
+        long start = System.currentTimeMillis();
+        TelegramTask4.calculateRating(new File("C:\\voina_i_mir_tom_1.txt"));
+        System.out.println("\nTime = " + (System.currentTimeMillis() - start) + " ms");
+    }
 }
