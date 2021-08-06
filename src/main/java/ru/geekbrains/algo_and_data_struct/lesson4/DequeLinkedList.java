@@ -1,10 +1,7 @@
 package ru.geekbrains.algo_and_data_struct.lesson4;
 
 public class DequeLinkedList<E> extends SimpleLinkedListImpl<E> implements Deque<E> {
-
-    //private Node<E> firstNode = null;
     protected Node<E> lastNode = null;
-    //private int size;
 
     @Override
     public boolean addFirst(E element) {
@@ -78,34 +75,4 @@ public class DequeLinkedList<E> extends SimpleLinkedListImpl<E> implements Deque
     public boolean remove(E element) {
         throw new UnsupportedOperationException();
     }
-
-    /*@Override
-    public Iterator<E> iterator() {
-        return new DequeLinkedListIterator();
-    }
-
-    private class DequeLinkedListIterator implements Iterator<E> {
-        private Node<E> current;
-        private Node<E> next;
-        private int nextIndex;
-
-        DequeLinkedListIterator() {
-            next = DequeLinkedList.this.firstNode;
-            nextIndex = 0;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return nextIndex < size;
-        }
-
-        @Override
-        public E next() {
-            if (!hasNext()) throw new NoSuchElementException();
-            current = next;
-            next = next.getNext();
-            nextIndex++;
-            return current.getData();
-        }
-    }*/
 }
