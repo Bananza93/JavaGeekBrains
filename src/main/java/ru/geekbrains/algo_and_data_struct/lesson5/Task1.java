@@ -13,6 +13,11 @@ public class Task1 {
 
     private static double calculatePower1(double base, int exponent) {
         if (exponent == 0) return 1;
-        return base * calculatePower1(base, exponent - 1);
+        if (exponent % 2 == 1) {
+            return base * calculatePower1(base, exponent - 1);
+        } else {
+            double b = calculatePower1(base, exponent / 2);
+            return b * b;
+        }
     }
 }
