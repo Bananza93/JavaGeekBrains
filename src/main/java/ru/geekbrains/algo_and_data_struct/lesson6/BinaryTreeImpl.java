@@ -43,7 +43,116 @@ public class BinaryTreeImpl<E extends Comparable<? super E>> implements BinaryTr
 
     @Override
     public boolean remove(E value) {
-        return false;
+        NodeAndParent nodeAndParent = find(value);
+        Node<E> removedNode = nodeAndParent.current;
+        Node<E> parentNode = nodeAndParent.previous;
+
+        if (removedNode == null) {
+            return false;
+        } else if (removedNode.isLeaf()) {
+            removeLeafNode(removedNode, parentNode);
+        } else if (removedNode.hasOnlyOneChild()) {
+            removeNodeWithOneChild(removedNode, parentNode);
+        } else {
+            removeNodeWithAllChildren(removedNode, parentNode);
+        }
+        size--;
+        return true;
+    }
+
+    private void removeLeafNode(Node<E> removedNode, Node<E> parentNode) {
+        if (removedNode == root) {
+            root = null;
+        } else if (parentNode.toLeftDirection(removedNode.getValue())) {
+            parentNode.setLeftChild(null);
+        } else {
+            parentNode.setRightChild(null);
+        }
+    }
+
+    private void removeNodeWithOneChild(Node<E> removedNode, Node<E> parentNode) {
+        Node<E> childNode = removedNode.getLeftChild() != null
+                ? removedNode.getLeftChild()
+                : removedNode.getRightChild();
+
+        if (removedNode == root) {
+            root = childNode;
+        } else if (parentNode.toLeftDirection(removedNode.getValue())) {
+            parentNode.setLeftChild(childNode);
+        } else {
+            parentNode.setRightChild(childNode);
+        }
+    }
+
+    private void removeNodeWithAllChildren(Node<E> removedNode, Node<E> parentNode) {
+        Node<E> successor = getSuccessor(removedNode);
+        if (removedNode == root) {
+            root = successor;
+        } else if (parentNode.toLeftDirection(removedNode.getValue())) {
+            parentNode.setLeftChild(successor);
+        } else {
+            parentNode.setRightChild(successor);
+        }
+
+        successor.setLeftChild(removedNode.getLeftChild());
+    }
+
+    private Node<E> getSuccessor(Node<E> removedNode) {
+        Node<E> successor = removedNode;
+        Node<E> successorParent = null;
+        Node<E> current = removedNode.getRightChild();
+
+        while (current != null) {
+            successorParent = successor;
+            successor = current;
+            current = current.getLeftChild();
+        }
+
+        if (successor != removedNode.getRightChild() && successorParent != null) {
+            successorParent.setLeftChild(successor.getRightChild());
+            successor.setRightChild(removedNode.getRightChild());
+        }
+        return successor;
+    }
+
+    @Override
+    public void traverse(TraverseMode mode) {
+        switch (mode) {
+            case PRE_ORDER -> preOrder(root);
+            case POST_ORDER -> postOrder(root);
+            case IN_ORDER -> inOrder(root);
+            default -> throw new RuntimeException("Unknown travers mode: " + mode);
+        }
+    }
+
+    private void inOrder(Node<E> current) {
+        if (current == null) {
+            return;
+        }
+
+        inOrder(current.getLeftChild());
+        System.out.print(current.getValue() + " ");
+        inOrder(current.getRightChild());
+    }
+
+    private void postOrder(Node<E> current) {
+        if (current == null) {
+            return;
+        }
+
+        postOrder(current.getLeftChild());
+        postOrder(current.getRightChild());
+        System.out.print(current.getValue() + " ");
+    }
+
+    private void preOrder(Node<E> current) {
+        if (current == null) {
+            return;
+        }
+
+        System.out.print(current.getValue() + " ");
+        preOrder(current.getLeftChild());
+        preOrder(current.getRightChild());
     }
 
     @Override
@@ -131,8 +240,11 @@ public class BinaryTreeImpl<E extends Comparable<? super E>> implements BinaryTr
         return new NodeAndParent(current, parent, currLevel);
     }
 
+    enum TraverseMode {
+        PRE_ORDER, IN_ORDER, POST_ORDER
+    }
 
-    private class Node<T extends Comparable<? super T>> {
+    private static class Node<T extends Comparable<? super T>> {
 
         private T value;
         private Node<T> leftChild;
@@ -172,6 +284,14 @@ public class BinaryTreeImpl<E extends Comparable<? super E>> implements BinaryTr
 
         private boolean toRightDirection(T value) {
             return this.value.compareTo(value) < 0;
+        }
+
+        public boolean isLeaf() {
+            return leftChild == null && rightChild == null;
+        }
+
+        public boolean hasOnlyOneChild() {
+            return leftChild != null ^ rightChild != null;
         }
     }
 
