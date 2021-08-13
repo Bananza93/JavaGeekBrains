@@ -6,7 +6,7 @@ public class BinaryTreeImpl<E extends Comparable<? super E>> implements BinaryTr
 
     private int size;
     private Node<E> root;
-    private int currentLevel;
+    private int currentDepth;
     private final int MAX_LEVEL;
 
     public BinaryTreeImpl(int maxLevel) {
@@ -26,14 +26,14 @@ public class BinaryTreeImpl<E extends Comparable<? super E>> implements BinaryTr
         } else {
             nodeAndParent.previous.setRightChild(node);
         }
-        if (currentLevel < nodeAndParent.level) currentLevel = nodeAndParent.level;
+        if (currentDepth < nodeAndParent.level) currentDepth = nodeAndParent.level;
         size++;
         return true;
     }
 
     @Override
     public int getCurrentDepth() {
-        return currentLevel;
+        return currentDepth;
     }
 
     @Override
