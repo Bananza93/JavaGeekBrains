@@ -6,6 +6,7 @@ public interface BinaryTree<E extends Comparable<? super E>> {
     boolean contains(E value);
     boolean remove(E value);
     int getCurrentDepth();
+    void traverse(BinaryTreeImpl.TraverseMode mode);
     boolean isEmpty();
     int size();
     void display();
