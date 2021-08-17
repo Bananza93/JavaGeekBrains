@@ -48,18 +48,15 @@ public class GraphImpl implements Graph {
 
     @Override
     public void display() {
-        /*StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size(); i++) {
             sb.append(vertexList.get(i).getLabel()).append(" -> { ");
-            for (int j = 0; j < size(); j++) {
-                sb.append(vertexList.get(j).getLabel()).append("(").append(adjacencyMatrix[i][j]).append(")");
-                if (j != size() - 1) {
-                    sb.append(", ");
-                }
+            for (Edge edge : adjacencyList.get(i)) {
+                sb.append(vertexList.get(edge.getDestinationIndex()).getLabel()).append("(").append(edge.getWeight()).append(") ");
             }
-            sb.append(" }\n");
+            sb.append("}\n");
         }
-        System.out.println(sb);*/
+        System.out.println(sb);
     }
 
     @Override
@@ -67,13 +64,13 @@ public class GraphImpl implements Graph {
         int startIndex = findIndex(startLabel);
         int endIndex = findIndex(endLabel);
         Pair<int[], int[]> pair = getMinDistancesAndPaths(startIndex);
-        printMinPath(pair.getKey(), pair.getValue(), startIndex, endIndex);
+        printPaths(pair.getKey(), pair.getValue(), startIndex, endIndex);
     }
 
     public void findAllShortestPaths(String startLabel) {
         int startIndex = findIndex(startLabel);
         Pair<int[], int[]> pair = getMinDistancesAndPaths(startIndex);
-        printAllMinPaths(pair.getKey(), pair.getValue(), startIndex);
+        printPaths(pair.getKey(), pair.getValue(), startIndex, -1);
     }
 
     private Pair<int[], int[]> getMinDistancesAndPaths(int sourceVertexIndex) {
@@ -81,6 +78,7 @@ public class GraphImpl implements Graph {
         int[] distance = new int[vertexList.size()];
         Arrays.fill(distance, Integer.MAX_VALUE);
         PriorityQueue<Pair<Integer, Integer>> queue = new PriorityQueue<>(vertexList.size(), Comparator.comparingInt(Pair::getValue));
+
         distance[sourceVertexIndex] = 0;
         queue.offer(new Pair<>(sourceVertexIndex, distance[sourceVertexIndex]));
         while (!queue.isEmpty()) {
@@ -106,31 +104,14 @@ public class GraphImpl implements Graph {
         return new Pair<>(distance, path);
     }
 
-    private void printMinPath(int[] distance, int[] path, int sourceIndex, int destinationIndex) {
-        StringBuilder sb = new StringBuilder();
-        if (destinationIndex != sourceIndex) {
-            for (int j = destinationIndex; ; ) {
-                int ind = path[j];
-                sb.insert(0, vertexList.get(ind).getLabel()).insert(0, " ");
-                if (ind == sourceIndex) break;
-                else j = ind;
-            }
-        } else sb.insert(0, " Source");
-        System.out.println("Source Vertex: " + vertexList.get(sourceIndex).getLabel()
-                + " to vertex " + vertexList.get(destinationIndex).getLabel()
-                + " distance: " + distance[destinationIndex]
-                + " | Path ->" + sb);
-    }
-
-    private void printAllMinPaths(int[] distance, int[] path, int sourceIndex) {
-        for (int i = 0; i < vertexList.size(); i++) {
+    private void printPaths(int[] distance, int[] path, int sourceIndex, int destinationIndex) {
+        for (int i = Math.max(destinationIndex, 0); i < (destinationIndex >= 0 ? destinationIndex + 1 : size()); i++) {
             StringBuilder sb = new StringBuilder();
             if (i != sourceIndex) {
                 for (int j = i; ; ) {
-                    int ind = path[j];
-                    sb.insert(0, vertexList.get(ind).getLabel()).insert(0, " ");
-                    if (ind == sourceIndex) break;
-                    else j = ind;
+                    j = path[j];
+                    sb.insert(0, vertexList.get(j).getLabel()).insert(0, " ");
+                    if (j == sourceIndex) break;
                 }
             } else sb.insert(0, " Source");
             System.out.println("Source Vertex: " + vertexList.get(sourceIndex).getLabel()

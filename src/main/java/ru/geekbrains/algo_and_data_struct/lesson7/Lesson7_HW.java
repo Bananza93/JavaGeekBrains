@@ -32,13 +32,13 @@ public class Lesson7_HW {
         gr.addEdge("H","J",8);
         gr.addEdge("I","J",5);
 
+        gr.display();
         gr.findAllShortestPaths("B");
         System.out.println();
         gr.findShortestPath("B", "D");
         gr.findShortestPath("B", "G");
         gr.findShortestPath("B", "H");
         gr.findShortestPath("B", "J");
-//
-//        gr.display();
+
     }
 }
